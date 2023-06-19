@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,11 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contributors', function (Blueprint $table) {
+        Schema::create('apportionments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('contributed')->default(false);
-            $table->boolean('exempt')->default(false);
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->decimal('apart', 10, 2)->nullable();
+            $table->decimal('total', 10, 2);
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contributors');
+        Schema::dropIfExists('apportionments');
     }
 };

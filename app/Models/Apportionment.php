@@ -14,8 +14,8 @@ class Apportionment extends Model
         return $this->belongsTo(ApportionmentProduct::class);
     }
 
-    public function apportionmentContributors()
+    public function contributors()
     {
-        return $this->belongsTo(ApportionmentContributor::class);
+        return $this->hasMany(Contributor::class);
     }
 }

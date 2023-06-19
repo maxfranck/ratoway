@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Apportionment;
-use App\Models\Contributor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('apportionment_contributors', function (Blueprint $table) {
+        Schema::create('contributors', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreignIdFor(Apportionment::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Contributor::class)->constrained()->cascadeOnDelete();
+            $table->boolean('contributed')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('apportionment_contributors');
+        Schema::dropIfExists('contributors');
     }
 };

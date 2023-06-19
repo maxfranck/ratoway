@@ -9,8 +9,8 @@ class Contributor extends Model
 {
     use HasFactory;
 
-    public function apportionmentContributors()
+    public function apportionment()
     {
-        return $this->belongsTo(ApportionmentContributor::class);
+        return $this->belongsTo(Apportionment::class);
     }
 }
