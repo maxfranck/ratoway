@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repository\IProductRepository;
-use App\Repository\ProductRepository;
+use App\Repository\AdminRepository;
+use App\Repository\IAdminRepository;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Sanctum::ignoreMigrations();
 
-        $this->app->bind(IProductRepository::class, ProductRepository::class);
+        $this->app->bind(IAdminRepository::class, AdminRepository::class);
     }
 
     /**

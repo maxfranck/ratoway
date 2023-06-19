@@ -24,14 +24,15 @@
                         <td>{{ $product->size }}</td>
                         <td>{{ $product->pieces }}</td>
                         <td>
-                            <a href="{{ route('product.show', $product->id) }}" class="btn btn-primary btn-sm">Ver</a>
-                            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ route('admin.product.show', $product->id) }}" class="btn btn-primary btn-sm">Ver</a>
+                            <a href="{{ route('admin.product.edit', $product->id) }}"
+                                class="btn btn-warning btn-sm">Editar</a>
                             <a href="#" class="btn btn-danger btn-sm"
                                 onclick="event.preventDefault(); if (confirm('Tem certeza que deseja excluir este produto?')) { document.getElementById('delete-form-{{ $product->id }}').submit(); }">
                                 Excluir
                             </a>
                             <form id="delete-form-{{ $product->id }}"
-                                action="{{ route('product.destroy', ['id' => $product->id]) }}" method="POST"
+                                action="{{ route('admin.product.destroy', ['id' => $product->id]) }}" method="POST"
                                 style="display: none;">
                                 @csrf
                                 @method('DELETE')

@@ -4,7 +4,7 @@
     <div class="container">
         <h2 class="mt-4 mb-4">Edição de Produtos</h2>
         <hr>
-        <form method="POST" action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.product.update', $product->id) }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Nome:</label>
@@ -47,7 +47,7 @@
             </div>
             <hr>
             <button type="submit" class="btn btn-success">Salvar</button>
-            <a href="{{ route('product.show', $product->id) }}" class="btn btn-primary">Voltar</a>
+            <a href="{{ route('admin.product.show', $product->id) }}" class="btn btn-primary">Voltar</a>
         </form>
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
