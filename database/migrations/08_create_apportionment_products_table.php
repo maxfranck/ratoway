@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('apportionment_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Apportionment::class)->constrained();
-            $table->foreignIdFor(Product::class)->constrained();
+            $table->foreignIdFor(Apportionment::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Product::class)->constrained()->cascadeOnDelete();
             $table->string('apart')->nullable();
             $table->integer('quantity');
             $table->timestamps();

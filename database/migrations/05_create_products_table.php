@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('flavor')->nullable();
             $table->text('description')->nullable();
-            $table->string('size');
+            $table->string('size')->nullable();
             $table->tinyInteger('pieces')->default(0);
             $table->string('image')->nullable();
             $table->decimal('price', 10, 2);

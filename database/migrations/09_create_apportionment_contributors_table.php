@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('apportionment_contributors', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Apportionment::class)->constrained();
-            $table->foreignIdFor(Contributor::class)->constrained();
+            $table->foreignIdFor(Apportionment::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Contributor::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
