@@ -9,6 +9,8 @@ class Contributor extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function apportionment()
     {
         return $this->belongsTo(Apportionment::class);

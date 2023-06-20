@@ -9,6 +9,8 @@ class Apportionment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'user_id'];
+
     public function apportionmentProducts()
     {
         return $this->belongsTo(ApportionmentProduct::class);
@@ -17,5 +19,11 @@ class Apportionment extends Model
     public function contributors()
     {
         return $this->hasMany(Contributor::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'apportionment_products')
+            ->withPivot('quantity');
     }
 }

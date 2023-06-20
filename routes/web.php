@@ -29,7 +29,24 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 });
 
 // Apportionment
-Route::prefix('apportionment')->middleware('auth')->group(function () {
-    Route::get('/', [ApportionmentController::class, 'index'])->name('apportionment.index');
-    Route::post('/select', [ApportionmentController::class, 'select'])->name('apportionment.select');
+Route::middleware('auth')->group(function () {
+    Route::get('/', [ApportionmentController::class, 'create'])->name('apportionment.create');
+    Route::post('/apportionments', [ApportionmentController::class, 'store'])->name('apportionment.store');
+    Route::get('/apportionments/{id}', [ApportionmentController::class, 'show'])->name('apportionment.show');
+
+    Route::post('/apportionments/{id}/products', [ApportionmentController::class, 'storeProduct'])->name('apportionment.product.store');
+    Route::delete('/apportionments/{apportionment}/products/{product}', [ApportionmentController::class, 'destroyProduct'])
+        ->name('apportionment.product.destroy');
+
+    Route::get('/apportionments/{apportionment}/contributors', [ApportionmentController::class, 'contributors'])
+        ->name('apportionment.contributors');
+    Route::post('/apportionments/{apportionment}/contributors', [ApportionmentController::class, 'storeContributor'])
+        ->name('apportionment.contributors.store');
+    Route::delete('/apportionments/{apportionment}/contributors/{contributor}', [ApportionmentController::class, 'destroyContributor'])
+        ->name('apportionment.contributors.destroy');
+
+    Route::get('/apportionments/{apportionment}/summary', [ApportionmentController::class, 'showSummary'])
+        ->name('apportionment.summary');
+    Route::post('/apportionments/{apportionment}/abater', [ApportionmentController::class, 'abater'])
+        ->name('apportionment.abater');
 });

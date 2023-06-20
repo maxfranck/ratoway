@@ -9,6 +9,8 @@ class ApportionmentProduct extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['product_id'];
+
     public function apportionments()
     {
         return $this->hasMany(Apportionment::class);

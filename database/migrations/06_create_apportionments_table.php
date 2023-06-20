@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->decimal('apart', 10, 2)->nullable();
-            $table->decimal('total', 10, 2);
+            $table->decimal('total', 10, 2)->nullable();
             $table->timestamps();
         });
     }
