@@ -3,28 +3,26 @@
 
 @section('content')
     <div class="container">
-        <h1>Contributors for Apportionment {{ $apportionment->id }}</h1>
-
+        <h2 class="mt-4">Contribuidores</h2>
+        <hr>
         <form method="POST" action="{{ route('apportionment.contributors.store', $apportionment->id) }}">
             @csrf
 
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Nome</label>
                 <input type="text" name="name" id="name" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save Contributor</button>
+            <button type="submit" class="btn btn-primary mt-4">Adicionar</button>
         </form>
 
         <hr>
 
-        <h2>Contributors List</h2>
-
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Action</th>
+                    <th>Nome</th>
+                    <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +41,11 @@
                 @endforeach
             </tbody>
         </table>
-
-        <a href="{{ route('apportionment.summary', $apportionment->id) }}" class="btn btn-primary">View Summary</a>
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="{{ route('apportionment.show', $apportionment->id) }}" class="btn btn-warning ">
+                << Voltar</a>
+                    <a href="{{ route('apportionment.summary', $apportionment->id) }}" class="btn btn-success">Continuar
+                        >></a>
+        </div>
     </div>
 @endsection

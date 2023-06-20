@@ -3,20 +3,13 @@
 
 @section('content')
     <div class="container">
-        <h1>Apportionment Details</h1>
-
-        <p><strong>Name:</strong> {{ $apportionment->name }}</p>
-        <p><strong>User ID:</strong> {{ $apportionment->user_id }}</p>
-
+        <h2 class="mt-4">{{ $apportionment->name }}</h2>
         <hr>
-
-        <h2>Add Product</h2>
-
         <form method="POST" action="{{ route('apportionment.product.store', $apportionment->id) }}">
             @csrf
 
             <div class="form-group">
-                <label for="product">Product</label>
+                <label for="product">Produtos</label>
                 <select name="product_id" id="product" class="form-control" required>
                     @foreach ($products as $product)
                         <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -25,26 +18,32 @@
             </div>
 
             <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="number" name="quantity" id="quantity" class="form-control" required>
+                <label for="quantity">Quantidade</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" type="button" id="decrement">-</button>
+                    </div>
+                    <input type="number" name="quantity" id="quantity" class="form-control" required min="1"
+                        value="1">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="increment">+</button>
+                    </div>
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary mt-4">Adicionar</button>
         </form>
 
         <hr>
-
-        <h2>Total Price: ${{ $apportionment->total }}</h2>
-
-        <h2>Items</h2>
-
+        <h2>Valor Total: ${{ $apportionment->total }}</h2>
+        <hr>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Action</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,15 +57,42 @@
                                 action="{{ route('apportionment.product.destroy', [$apportionment->id, $product->id]) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Remove</button>
+                                <button type="submit" class="btn btn-danger">Remover</button>
                             </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
-        <a href="{{ route('apportionment.contributors', $apportionment->id) }}" class="btn btn-primary">View
-            Contributors</a>
+        <div class="d-flex justify-content-between align-items-center">
+            <form method="POST" action="{{ route('apportionment.destroy', [$apportionment->id]) }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-warning">
+                    << Voltar</button>
+            </form>
+            <a href="{{ route('apportionment.contributors', $apportionment->id) }}" class="btn btn-success">Continuar
+                >></a>
+        </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // Incrementar a quantidade
+            $('#increment').click(function() {
+                var quantity = parseInt($('#quantity').val());
+                $('#quantity').val(quantity + 1);
+            });
+
+            // Decrementar a quantidade
+            $('#decrement').click(function() {
+                var quantity = parseInt($('#quantity').val());
+                if (quantity > 1) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
+        });
+    </script>
+@endpush

@@ -38,6 +38,14 @@ class ApportionmentController extends Controller
         return view('apportionment.show', compact('apportionment', 'products'));
     }
 
+    public function destroy($id)
+    {
+        $apportionment = Apportionment::find($id);
+        $apportionment->delete();
+
+        return redirect()->route('apportionment.create');
+    }
+
     public function storeProduct(Request $request, $id)
     {
         $validatedData = $request->validate([

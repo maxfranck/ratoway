@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [ApportionmentController::class, 'create'])->name('apportionment.create');
     Route::post('/apportionments', [ApportionmentController::class, 'store'])->name('apportionment.store');
     Route::get('/apportionments/{id}', [ApportionmentController::class, 'show'])->name('apportionment.show');
+    Route::delete('/apportionments/{id}', [ApportionmentController::class, 'destroy'])->name('apportionment.destroy');
 
     Route::post('/apportionments/{id}/products', [ApportionmentController::class, 'storeProduct'])->name('apportionment.product.store');
     Route::delete('/apportionments/{apportionment}/products/{product}', [ApportionmentController::class, 'destroyProduct'])

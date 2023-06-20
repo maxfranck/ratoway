@@ -3,16 +3,16 @@
 
 @section('content')
     <div class="container">
-        <h1>Rateio</h1>
-        <p>Valor Total: {{ $apportionment->total }}</p>
-        <p>Soma dos pagamentos pendentes: {{ $pendingPayments }}</p>
-
-        <h2>Contributors</h2>
+        <h2 class="mt-4">{{ $apportionment->name }}</h2>
+        <hr>
+        <h5><b>Valor Total:</b> R$ {{ $apportionment->total }}</h5>
+        <h5><b>Valor a Receber:</b> R$ {{ $pendingPayments }}</h5>
+        <hr>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Ações</th>
+                    <th>Nome</th>
+                    <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +31,12 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="{{ route('apportionment.summary', $apportionment->id) }}" class="btn btn-warning ">
+                << Voltar</a>
+                    <a href="{{ route('apportionment.create') }}" class="btn btn-success">Finalizar
+                        >></a>
+        </div>
     </div>
 @endsection
 

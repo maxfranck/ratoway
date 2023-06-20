@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="container">
-        <h2 class="mt-4 mb-4">Produtos</h2>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mt-4">Produtos</h2>
+            <a href="{{ route('admin.product.create') }}" class="btn btn-primary">Cadastrar Novo</a>
+        </div>
         <hr>
         <table class="table table-bordered table-striped">
             <thead>
