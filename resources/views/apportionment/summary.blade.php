@@ -34,5 +34,8 @@
 
         <p>Total Price: {{ $apportionment->total }}</p>
         <p>Pedaços: {{ $pedacos }}</p>
+        <p>Pagar: R$ {{ $apportionment->total / $contributors->where('apportionment_id', $apportionment->id)->count() }}</p>
+
+        <a href="{{ route('apportionment.final', $apportionment->id) }}" class="btn btn-primary">Final</a>
     </div>
 @endsection

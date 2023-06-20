@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignIdFor(Apportionment::class)->constrained()->cascadeOnDelete();
+            $table->decimal('pay', 10, 2)->nullable();
             $table->boolean('contributed')->default(false);
             $table->timestamps();
         });

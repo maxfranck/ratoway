@@ -109,6 +109,7 @@
             @yield('content')
         </main>
     </div>
+    @stack('styles')
 </body>
 
 </html>

@@ -49,4 +49,7 @@ Route::middleware('auth')->group(function () {
         ->name('apportionment.summary');
     Route::post('/apportionments/{apportionment}/abater', [ApportionmentController::class, 'abater'])
         ->name('apportionment.abater');
+
+    Route::get('/apportionment/final/{apportionmentId}', [ApportionmentController::class, 'final'])->name('apportionment.final');
+    Route::post('/contributor/pago/{contributor}', [ApportionmentController::class, 'markAsPaid'])->name('contributor.pago')->middleware('web');
 });
