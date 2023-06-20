@@ -5,6 +5,7 @@
     <div class="container">
         <h1>Rateio</h1>
         <p>Valor Total: {{ $apportionment->total }}</p>
+        <p>Soma dos pagamentos pendentes: {{ $pendingPayments }}</p>
 
         <h2>Contributors</h2>
         <table class="table">
@@ -16,13 +17,15 @@
             </thead>
             <tbody>
                 @foreach ($apportionment->contributors as $contributor)
-                    <tr>
+                    <tr class="{{ $contributor->contributed ? 'pago' : '' }}">
                         <td>{{ $contributor->name }}</td>
                         <td>
-                            <form method="POST" action="{{ route('contributor.pago', $contributor->id) }}">
-                                @csrf
-                                <button type="submit" class="btn btn-success">Pago</button>
-                            </form>
+                            @if (!$contributor->contributed)
+                                <form method="POST" action="{{ route('contributor.pago', $contributor->id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Pago</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -30,3 +33,12 @@
         </table>
     </div>
 @endsection
+
+@push('styles')
+    <style>
+        .pago {
+            background-color: #c8e6c9;
+            /* Cor de fundo verde */
+        }
+    </style>
+@endpush

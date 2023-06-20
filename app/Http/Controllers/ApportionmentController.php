@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Apportionment;
 use App\Models\ApportionmentProduct;
+use App\Models\Contributor;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -131,6 +132,13 @@ class ApportionmentController extends Controller
         }
         $pedacos /= count($contributors);
 
+        // Calculo pay
+        $pay = $apportionment->total / count($contributors);
+        foreach ($contributors as $key => $contributor) {
+            Contributor::where('id', $contributor->id)
+                ->update(['pay' => $pay]);
+        }
+
         return view('apportionment.summary', compact('apportionment', 'apportionmentProducts', 'contributors', 'pedacos'));
     }
 
@@ -145,5 +153,22 @@ class ApportionmentController extends Controller
         $apportionment->save();
 
         return redirect()->route('apportionment.summary', $apportionment->id)->with('success', 'Valor abatido com sucesso!');
+    }
+
+    public function final($apportionmentId)
+    {
+        $apportionment = Apportionment::findOrFail($apportionmentId);
+        $pendingPayments = $apportionment->contributors()->where('contributed', '<>', 1)->sum('pay');
+
+
+        return view('apportionment.final', compact('apportionment', 'pendingPayments'));
+    }
+
+    public function markAsPaid(Contributor $contributor)
+    {
+        $contributor->contributed = 1;
+        $contributor->save();
+
+        return redirect()->back()->with('success', 'Contributor marcado como Pago!');
     }
 }
