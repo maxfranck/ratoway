@@ -30,6 +30,11 @@
                     <option value="M" {{ $product->size == 'M' ? 'selected' : '' }}>M</option>
                     <option value="G" {{ $product->size == 'G' ? 'selected' : '' }}>G</option>
                     <option value="EG" {{ $product->size == 'EG' ? 'selected' : '' }}>EG</option>
+                    <option value="1L" {{ $product->size == 'EG' ? 'selected' : '' }}>1L</option>
+                    <option value="2L" {{ $product->size == 'EG' ? 'selected' : '' }}>2L</option>
+                    <option value="600ml" {{ $product->size == 'EG' ? 'selected' : '' }}>600ml</option>
+                    <option value="500ml" {{ $product->size == 'EG' ? 'selected' : '' }}>500ml</option>
+                    <option value="350ml" {{ $product->size == 'EG' ? 'selected' : '' }}>350ml</option>
                 </select>
             </div>
             <div class="form-group">

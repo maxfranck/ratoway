@@ -27,11 +27,11 @@
                     <option value="M">M</option>
                     <option value="G">G</option>
                     <option value="EG">EG</option>
-                    <option value="EG">1L</option>
-                    <option value="EG">2L</option>
-                    <option value="EG">600ml</option>
-                    <option value="EG">500ml</option>
-                    <option value="EG">350ml</option>
+                    <option value="1L">1L</option>
+                    <option value="2L">2L</option>
+                    <option value="600ml">600ml</option>
+                    <option value="500ml">500ml</option>
+                    <option value="350ml">350ml</option>
                 </select>
             </div>
             <div class="form-group">
