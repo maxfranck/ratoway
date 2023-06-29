@@ -12,7 +12,8 @@
                 <label for="product">Produtos</label>
                 <select name="product_id" id="product" class="form-control" required>
                     @foreach ($products as $product)
-                        <option value="{{ $product->id }}">{{ $product->name }} {{ $product->flavor }} {{ $product->size }}</option>
+                        <option value="{{ $product->id }}">{{ $product->name }} {{ $product->flavor }} {{ $product->size }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -49,7 +50,7 @@
             <tbody>
                 @foreach ($apportionment->products as $product)
                     <tr>
-                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->name }} {{ $product->flavor }} {{ $product->size }}</td>
                         <td>{{ $product->pivot->quantity }}</td>
                         <td>{{ $product->price }}</td>
                         <td>
